@@ -9,7 +9,7 @@ A simple authentication template with Node, React, and AWS (Cognito). Uses Ant d
 - EULA sign in agreement
 - Forget password
 - Username and password management when logged in (Coming soon)
-- Logging out, (session storing)
+- Logging out (session storing)
 
 ## Screenshot
-![screenshot](./screen.png)
+![screenshot](./screen.PNG)
