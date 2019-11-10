@@ -1,0 +1,21 @@
+@media all and (min-width: 480px) {
+  .Signup {
+    padding: 60px 0;
+  }
+
+  .Signup form {
+    margin: 0 auto;
+    max-width: 400px;
+  }
+
+  .Signup .signup-form {
+    max-width: 450px;
+  }
+
+  .Signup .confirmation-form {
+    max-width: 430px;
+  }
+  .Signup .confirmation-form-button {
+    width: 100%;
+  }
+}
