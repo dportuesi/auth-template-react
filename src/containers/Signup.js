@@ -259,7 +259,7 @@ handleConfirmationSubmit = async event => {
             onChange: (e) => this.onCheckAllChange(e, 'termsAgreed') 
           })(
             <Checkbox >
-              I have read the <a href="\">agreement</a>
+              I have read and agree to the <a href="\">agreement</a>
             </Checkbox>,
           )}
         </Form.Item>
