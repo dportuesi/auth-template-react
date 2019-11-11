@@ -107,7 +107,7 @@ class ResetPassword extends Component {
     if (value && this.state.confirmDirty) {
       form.validateFields(['confirm'], { force: true });
     }
-    
+
     if(value && this.getPasswordValidity(value) !== "true") {
       callback(this.getPasswordValidity(value));
     }
@@ -115,13 +115,16 @@ class ResetPassword extends Component {
   };
 
   renderRequestCodeForm() {
-    const { getFieldDecorator } = this.props.form; 
+    const { getFieldDecorator } = this.props.form;
     return (
       <Form onSubmit={this.handleSendCodeClick} className="confirmation-form">
+        <div className="header">
+        <h3> Enter your email to receive a password reset code.</h3>
+      </div>
         <Form.Item htmlFor='email'>
             {getFieldDecorator('email', {
                 rules: [{ required: true, message: 'Please input your email!' }],
-                onChange: (e) => this.handleChange(e, 'email') 
+                onChange: (e) => this.handleChange(e, 'email')
             })(
                 <Input
                     prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -130,7 +133,7 @@ class ResetPassword extends Component {
                 />,
             )}
         </Form.Item>
-        
+
         <Form.Item>
           <Button type="primary" htmlType="submit" className="confirmation-form-button" disabled={!this.validateCodeForm()} loading={this.state.isSendingCode}>
             Send Confirmation
@@ -153,14 +156,15 @@ class ResetPassword extends Component {
             },
         },
     };
-    const { getFieldDecorator } = this.props.form; 
+    const { getFieldDecorator } = this.props.form;
     return (
       <Form onSubmit={this.handleConfirmClick} className="confirmation-form">
         <Form.Item htmlFor="code" label={
             <span>
               Confirmation Code&nbsp;
               <Tooltip title="Please check your email for the confirmation code.">
-                <Icon type="question-circle-o" />
+                <Icon type="question-circle-o"
+                  style = {{color: '#BFBFBF'}}/>
               </Tooltip>
             </span>
           }>
@@ -202,8 +206,8 @@ class ResetPassword extends Component {
                 validator: this.compareToFirstPassword,
               },
             ],
-            onChange: (e) => this.handleChange(e, 'confirmPassword') 
-          })(<Input.Password 
+            onChange: (e) => this.handleChange(e, 'confirmPassword')
+          })(<Input.Password
                 placeholder="Confirm Password"
                 type="password"
                 id="confirmPassword"
@@ -214,7 +218,7 @@ class ResetPassword extends Component {
             Confirm
           </Button>
         </Form.Item>
-        
+
       </Form>
     );
   }
