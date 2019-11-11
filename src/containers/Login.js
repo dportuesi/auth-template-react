@@ -85,7 +85,7 @@ class Login extends Component {
             <Button type="primary" htmlType="submit" loading={this.state.isLoading} disabled={!this.validateForm()} className="login-form-button">
               Log in
             </Button>
-            Or <a href="/signup">Register now!</a>
+            Or <a href="/signup">register now!</a>
           </Form.Item>
         </Form>
       </div>
