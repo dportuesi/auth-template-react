@@ -2,9 +2,13 @@ import React, { Component } from "react";
 import { withRouter } from 'react-router-dom';
 import Routes from './Routes';
 import { Auth } from "aws-amplify";
-import { Menu, Icon } from 'antd'
 import 'antd/dist/antd.css';
 import "./App.css";
+import { Layout, Menu } from 'antd'
+import { UserOutlined, SettingOutlined, LogoutOutlined, FormOutlined, LoginOutlined } from '@ant-design/icons';
+
+const { Header, Content, Footer } = Layout;
+const { SubMenu } = Menu;
 
 class App extends Component {
   constructor(props) {
@@ -58,33 +62,46 @@ class App extends Component {
     };
     return (
       !this.state.isAuthenticating &&
-      <div>
-        <div className="navbar" >
-          <div className="logo">
-              <a href="/">logo</a>
-          </div>
-          <Menu style={{float: 'right'}} onClick={this.handleNavItemClick} selectedKeys={[this.state.current]} mode="horizontal" >
-            {this.state.isAuthenticated
-              ? <Menu.Item onClick={ this.handleLogout } key="logout" >
-                  <Icon type="logout" />
-                  Logout
-                </Menu.Item>
-              : <Menu>
-                  <Menu.Item onClick={() => this.props.history.push("/signup")} key="register">
-                    <Icon type="form" />
-                    Register
-                  </Menu.Item>
-                  <Menu.Item onClick={() => this.props.history.push("/login")} key="login">
-                    <Icon type="login" />
-                    Login
-                  </Menu.Item>     
-                </Menu>
-            }    
-          </Menu>
-          </div>
-        
-        <Routes childProps={childProps} />
-      </div>
+        <Layout className="layout">
+          <Header>
+            <div className="logo" />
+
+            <Menu theme="dark" style={{float: 'right'}} onClick={this.handleNavItemClick} selectedKeys={[this.state.current]} mode="horizontal" >
+              {this.state.isAuthenticated
+                ? <SubMenu title={
+                    <>
+                      <UserOutlined style={{ fontSize: '24px' }}/>
+                    </>
+                    }>
+                    <Menu.Item key="settings">
+                      <SettingOutlined/>
+                      Settings
+                    </Menu.Item>
+                    <Menu.Item onClick={ this.handleLogout } key="logout">
+                      <LogoutOutlined/> 
+                      Logout
+                    </Menu.Item>
+                  </SubMenu>
+                : <Menu theme="dark" style={{float: 'right'}} mode="horizontal" >
+                    <Menu.Item onClick={() => this.props.history.push("/signup")} key="register">
+                      <FormOutlined />
+                      Register
+                    </Menu.Item>
+                    <Menu.Item onClick={() => this.props.history.push("/login")} key="login">
+                      <LoginOutlined />
+                      Login
+                    </Menu.Item>     
+                  </Menu>
+              }    
+            </Menu>
+          </Header>
+          <Content style={{ padding: '0 2px' }}>
+            <div className="site-layout-content">
+              <Routes childProps={childProps} />
+            </div>
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+        </Layout>
     );
   }
 }

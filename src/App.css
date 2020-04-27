@@ -1,22 +1,18 @@
-.App {
-  margin-top: 15px;
+.site-layout-content {
+  background: #fff;
+  padding: 24px;
+  min-height: 280px;
 }
-
-.navbar{
-  padding: 10px 20px;
-  border-bottom: solid 1px #e8e8e8;
-  overflow: hidden;
-  box-shadow: 0 0 30px #f3f1f1;
-  height: 59px;
-}
-
-.logo{
-  width: 150px;
+.logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 24px 16px 0;
   float: left;
 }
-.logo a{
-  display: inline-block;
-  font-size: 20px;
-  padding: 9px 20px;
-  text-transform: capitalize;
-}
+  [data-theme="dark"] .site-layout-content {
+    background: #141414;
+  }
+  [data-theme="dark"] .logo {
+    background: rgba(255,255,255,0.3);
+  }
