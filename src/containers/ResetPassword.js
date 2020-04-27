@@ -1,29 +1,23 @@
-import React, { Component } from "react";
-import { Auth } from "aws-amplify";
-import { Link } from "react-router-dom";
-import {
-    Form,
-    Input,
-    Button,
-    Tooltip,
-    Icon
-} from 'antd';
-import "./ResetPassword.css";
-import { hasNumber, hasUpperCase, hasLowerCase } from "../util/Util"
+import React, { Component } from 'react';
+import { Auth } from 'aws-amplify';
+import { Link } from 'react-router-dom';
+import { Form, Input, Button, Tooltip, Icon } from 'antd';
+import './ResetPassword.css';
+import { hasNumber, hasUpperCase, hasLowerCase } from '../util/Util';
 
 class ResetPassword extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      code: "",
-      email: "",
-      password: "",
+      code: '',
+      email: '',
+      password: '',
       codeSent: false,
       confirmed: false,
-      confirmPassword: "",
+      confirmPassword: '',
       isConfirming: false,
-      isSendingCode: false
+      isSendingCode: false,
     };
   }
 
@@ -46,11 +40,11 @@ class ResetPassword extends Component {
     });
     */
     this.setState({
-      [val]: event.target.value
+      [val]: event.target.value,
     });
-  }
+  };
 
-  handleSendCodeClick = async event => {
+  handleSendCodeClick = async (event) => {
     event.preventDefault();
 
     this.setState({ isSendingCode: true });
@@ -64,7 +58,7 @@ class ResetPassword extends Component {
     }
   };
 
-  handleConfirmClick = async event => {
+  handleConfirmClick = async (event) => {
     event.preventDefault();
 
     this.setState({ isConfirming: true });
@@ -91,16 +85,17 @@ class ResetPassword extends Component {
     }
   };
 
-  getPasswordValidity = (password) => { //TODO: fetch the password policy from aws. Currently its hardcoded in.
-    if(!hasNumber(password)) {
-      return "Password does not contain a number.";
-    } else if(!hasLowerCase(password)) {
-      return "Password does not contain a lower case character.";
-    } else if(!hasUpperCase(password)) {
-      return "Password does not contain a upper case character.";
+  getPasswordValidity = (password) => {
+    //TODO: fetch the password policy from aws. Currently its hardcoded in.
+    if (!hasNumber(password)) {
+      return 'Password does not contain a number.';
+    } else if (!hasLowerCase(password)) {
+      return 'Password does not contain a lower case character.';
+    } else if (!hasUpperCase(password)) {
+      return 'Password does not contain a upper case character.';
     }
-    return "true";
-  }
+    return 'true';
+  };
 
   validateToNextPassword = (rule, value, callback) => {
     const { form } = this.props;
@@ -108,7 +103,7 @@ class ResetPassword extends Component {
       form.validateFields(['confirm'], { force: true });
     }
 
-    if(value && this.getPasswordValidity(value) !== "true") {
+    if (value && this.getPasswordValidity(value) !== 'true') {
       callback(this.getPasswordValidity(value));
     }
     callback();
@@ -119,23 +114,29 @@ class ResetPassword extends Component {
     return (
       <Form onSubmit={this.handleSendCodeClick} className="confirmation-form">
         <div className="header">
-        <h3> Enter your email to receive a password reset code.</h3>
-      </div>
-        <Form.Item htmlFor='email'>
-            {getFieldDecorator('email', {
-                rules: [{ required: true, message: 'Please input your email!' }],
-                onChange: (e) => this.handleChange(e, 'email')
-            })(
-                <Input
-                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                    placeholder="Email"
-                    id='email'
-                />,
-            )}
+          <h3> Enter your email to receive a password reset code.</h3>
+        </div>
+        <Form.Item htmlFor="email">
+          {getFieldDecorator('email', {
+            rules: [{ required: true, message: 'Please input your email!' }],
+            onChange: (e) => this.handleChange(e, 'email'),
+          })(
+            <Input
+              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder="Email"
+              id="email"
+            />
+          )}
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="confirmation-form-button" disabled={!this.validateCodeForm()} loading={this.state.isSendingCode}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="confirmation-form-button"
+            disabled={!this.validateCodeForm()}
+            loading={this.state.isSendingCode}
+          >
             Send Confirmation
           </Button>
         </Form.Item>
@@ -145,37 +146,35 @@ class ResetPassword extends Component {
 
   renderConfirmationForm() {
     const tailFormItemLayout = {
-        wrapperCol: {
-            xs: {
-            span: 24,
-            offset: 0,
-            },
-            sm: {
-            span: 16,
-            offset: 8,
-            },
+      wrapperCol: {
+        xs: {
+          span: 24,
+          offset: 0,
         },
+        sm: {
+          span: 16,
+          offset: 8,
+        },
+      },
     };
     const { getFieldDecorator } = this.props.form;
     return (
       <Form onSubmit={this.handleConfirmClick} className="confirmation-form">
-        <Form.Item htmlFor="code" label={
+        <Form.Item
+          htmlFor="code"
+          label={
             <span>
               Confirmation Code&nbsp;
               <Tooltip title="Please check your email for the confirmation code.">
-                <Icon type="question-circle-o"
-                  style = {{color: '#BFBFBF'}}/>
+                <Icon type="question-circle-o" style={{ color: '#BFBFBF' }} />
               </Tooltip>
             </span>
-          }>
+          }
+        >
           {getFieldDecorator('code', {
             rules: [{ required: true, message: 'Please input code.' }],
-            onChange: (e) => this.handleChange(e, 'code')
-          })(
-            <Input
-              id="code"
-            />,
-          )}
+            onChange: (e) => this.handleChange(e, 'code'),
+          })(<Input id="code" />)}
         </Form.Item>
         <Form.Item htmlFor="password" label="Password" hasFeedback>
           {getFieldDecorator('password', {
@@ -188,14 +187,20 @@ class ResetPassword extends Component {
                 validator: this.validateToNextPassword,
               },
             ],
-            onChange: (e) => this.handleChange(e, 'password') 
-          })(<Input.Password 
-                type="password"
-                placeholder="Password"
-                id="password"
-            />)}
+            onChange: (e) => this.handleChange(e, 'password'),
+          })(
+            <Input.Password
+              type="password"
+              placeholder="Password"
+              id="password"
+            />
+          )}
         </Form.Item>
-        <Form.Item htmlFor="confirmPassword" label="Confirm Password" hasFeedback>
+        <Form.Item
+          htmlFor="confirmPassword"
+          label="Confirm Password"
+          hasFeedback
+        >
           {getFieldDecorator('confirm', {
             rules: [
               {
@@ -206,19 +211,25 @@ class ResetPassword extends Component {
                 validator: this.compareToFirstPassword,
               },
             ],
-            onChange: (e) => this.handleChange(e, 'confirmPassword')
-          })(<Input.Password
-                placeholder="Confirm Password"
-                type="password"
-                id="confirmPassword"
-          />)}
+            onChange: (e) => this.handleChange(e, 'confirmPassword'),
+          })(
+            <Input.Password
+              placeholder="Confirm Password"
+              type="password"
+              id="confirmPassword"
+            />
+          )}
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit" loading={this.state.isConfirming} disabled={!this.validateResetForm()}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            loading={this.state.isConfirming}
+            disabled={!this.validateResetForm()}
+          >
             Confirm
           </Button>
         </Form.Item>
-
       </Form>
     );
   }
@@ -242,8 +253,8 @@ class ResetPassword extends Component {
         {!this.state.codeSent
           ? this.renderRequestCodeForm()
           : !this.state.confirmed
-            ? this.renderConfirmationForm()
-            : this.renderSuccessMessage()}
+          ? this.renderConfirmationForm()
+          : this.renderSuccessMessage()}
       </div>
     );
   }

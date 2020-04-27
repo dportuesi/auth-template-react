@@ -1,0 +1,17 @@
+.user-panel {
+  margin: auto;
+  width: 50%;
+  padding: 20px 10px 10px 10px;
+  text-align: center;
+  border-bottom: 2px solid #001f54;
+}
+.user-settings {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+  padding: 20px 10px 10px 10px;
+}
+
+.user-settings .btn-settings-user {
+  margin: 0px 0px 15px 0px;
+}
