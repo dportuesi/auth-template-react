@@ -10,7 +10,7 @@ import {
   SettingOutlined,
   LogoutOutlined,
   FormOutlined,
-  LoginOutlined,
+  LoginOutlined
 } from '@ant-design/icons';
 
 const { Header, Content, Footer } = Layout;
@@ -23,7 +23,6 @@ class App extends Component {
     this.state = {
       isAuthenticated: false,
       isAuthenticating: true,
-      current: '',
     };
   }
 
@@ -54,12 +53,6 @@ class App extends Component {
     this.props.history.push('/login');
   };
 
-  handleNavItemClick = (e) => {
-    this.setState({
-      current: e.key,
-    });
-  };
-
   render() {
     const childProps = {
       isAuthenticated: this.state.isAuthenticated,
@@ -70,13 +63,11 @@ class App extends Component {
         <Layout className="layout">
           <Header>
             <div className="logo" />
-
             <Menu
               theme="dark"
               style={{ float: 'right' }}
               onClick={this.handleNavItemClick}
-              selectedKeys={[this.state.current]}
-              mode="horizontal"
+              mode="horizontal"    
             >
               {this.state.isAuthenticated ? (
                 <SubMenu
@@ -87,13 +78,13 @@ class App extends Component {
                   }
                 >
                   <Menu.Item
-                    onClick={() => this.props.history.push('/settings')}
                     key="settings"
+                    onClick={() => this.props.history.push('/settings')}
                   >
                     <SettingOutlined />
                     Settings
                   </Menu.Item>
-                  <Menu.Item onClick={this.handleLogout} key="logout">
+                  <Menu.Item key="logout" onClick={this.handleLogout}>
                     <LogoutOutlined />
                     Logout
                   </Menu.Item>
@@ -101,15 +92,15 @@ class App extends Component {
               ) : (
                 <Menu theme="dark" style={{ float: 'right' }} mode="horizontal">
                   <Menu.Item
-                    onClick={() => this.props.history.push('/signup')}
                     key="register"
+                    onClick={() => this.props.history.push('/signup')}
                   >
                     <FormOutlined />
                     Register
                   </Menu.Item>
                   <Menu.Item
-                    onClick={() => this.props.history.push('/login')}
                     key="login"
+                    onClick={() => this.props.history.push('/login')}
                   >
                     <LoginOutlined />
                     Login

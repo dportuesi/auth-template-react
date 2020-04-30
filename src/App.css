@@ -15,3 +15,25 @@
 [data-theme='dark'] .logo {
   background: rgba(255, 255, 255, 0.3);
 }
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.ant-menu { 
+  height: 100%;
+}
+
+[role="menuitem"]{
+  margin-top: 4% !important;
+  font-size: 17px;
+}
+
+.ant-menu-submenu-title [role="img"] {
+  margin-top: 40% !important;
+  font-size: 27px !important;
+}
