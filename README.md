@@ -5,11 +5,14 @@ A simple authentication template with Node, React, and AWS (Cognito). Uses Ant d
 ### Features: 
 - Login page
 - Signup page
-- Password validation with custom rules (Must also set in AWS)
+- Password validation with custom rules (Must also set validation rules in AWS)
 - EULA sign in agreement
 - Forget password
 - Username and password management when logged in (Coming soon)
-- Logging out (session storing)
+- Logging in and out (session storing)
 
 ## Screenshot
 ![screenshot](./screen.PNG)
+
+
+![screenshot](./screen_2.PNG)
