@@ -43,7 +43,7 @@ export default ({ childProps }) => (
       component={Settings}
       props={childProps}
     />
-    <AppliedRoute
+    <PrivateAppliedRoute
       path="/user/changepassword"
       exact
       component={ChangePassword}

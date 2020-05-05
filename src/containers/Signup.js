@@ -32,7 +32,7 @@ class Signup extends Component {
       this.state.password.length > getMinPasswordLength() &&
       this.state.password === this.state.confirmPassword &&
       this.state.termsAgreed === true &&
-      this.state.username.length > 0 //TODO: Check password meets rules (view changepassword)?
+      this.state.username.length > 0 && this.getPasswordValidity(this.state.password) === 'true'
     );
   }
 
