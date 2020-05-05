@@ -3,7 +3,7 @@ import './Signup.css';
 import { Form, Input, Checkbox, Button } from 'antd';
 import { Auth } from 'aws-amplify';
 
-import { hasNumber, hasUpperCase, hasLowerCase } from '../util/Util';
+import { hasNumber, hasUpperCase, hasLowerCase, getMinPasswordLength } from '../util/Util';
 
 class Signup extends Component {
   state = {
@@ -29,10 +29,10 @@ class Signup extends Component {
   validateForm() {
     return (
       this.state.email.length > 0 &&
-      this.state.password.length > 0 &&
+      this.state.password.length > getMinPasswordLength() &&
       this.state.password === this.state.confirmPassword &&
       this.state.termsAgreed === true &&
-      this.state.username.length > 0
+      this.state.username.length > 0 //TODO: Check password meets rules (view changepassword)?
     );
   }
 
@@ -110,13 +110,15 @@ class Signup extends Component {
 
   getPasswordValidity = (password) => {
     //TODO: fetch the password policy from aws. Currently its hardcoded in.
-    if (!hasNumber(password)) {
+    if(password.length < getMinPasswordLength()) {
+      return 'Password is too short!';
+    } else if (!hasNumber(password)) {
       return 'Password does not contain a number.';
     } else if (!hasLowerCase(password)) {
       return 'Password does not contain a lower case character.';
     } else if (!hasUpperCase(password)) {
       return 'Password does not contain a upper case character.';
-    }
+    } 
     return 'true';
   };
 
