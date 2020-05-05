@@ -1,15 +1,15 @@
-function hasNumber(myString) {
+export function hasNumber(myString) {
   return /\d/.test(myString);
 }
 
-function hasLowerCase(str) {
+export function hasLowerCase(str) {
   return /[a-z]/.test(str);
 }
 
-function hasUpperCase(str) {
+export function hasUpperCase(str) {
   return /[A-Z]/.test(str);
 }
 
-exports.hasNumber = hasNumber;
-exports.hasLowerCase = hasLowerCase;
-exports.hasUpperCase = hasUpperCase;
+export function getMinPasswordLength() {
+  return 5;
+}

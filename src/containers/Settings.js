@@ -7,8 +7,6 @@ import { UserOutlined } from '@ant-design/icons';
 export default class Home extends React.Component {
   changeEmail() {}
 
-  changePassword() {}
-
   render() {
     return (
       <div>
@@ -31,7 +29,7 @@ export default class Home extends React.Component {
             block
             type="primary"
             className="btn-settings-user"
-            onClick={() => this.changePassword()}
+            onClick={() => this.props.history.push('/user/changepassword')}
           >
             Change Password
           </Button>

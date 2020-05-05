@@ -79,7 +79,7 @@ class App extends Component {
                 >
                   <Menu.Item
                     key="settings"
-                    onClick={() => this.props.history.push('/settings')}
+                    onClick={() => this.props.history.push('/user')}
                   >
                     <SettingOutlined />
                     Settings
